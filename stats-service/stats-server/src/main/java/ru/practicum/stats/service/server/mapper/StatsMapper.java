@@ -1,9 +1,9 @@
-package ru.practicum.stats.server.mapper;
+package ru.practicum.stats.service.server.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.practicum.stats.server.model.Event;
-import ru.practicum.stats.server.model.Statistic;
+import ru.practicum.stats.service.server.model.Event;
+import ru.practicum.stats.service.server.model.Statistic;
 import ru.practicum.stats.service.dto.EventRequest;
 import ru.practicum.stats.service.dto.StatisticResponse;
 

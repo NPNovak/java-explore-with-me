@@ -1,4 +1,4 @@
-package ru.practicum.stats.server.exception;
+package ru.practicum.stats.service.server.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.JDBCException;

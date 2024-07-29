@@ -1,10 +1,10 @@
-package ru.practicum.stats.server.service;
+package ru.practicum.stats.service.server.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.practicum.stats.server.mapper.StatsMapper;
-import ru.practicum.stats.server.repository.StatsRepository;
+import ru.practicum.stats.service.server.mapper.StatsMapper;
+import ru.practicum.stats.service.server.repository.StatsRepository;
 import ru.practicum.stats.service.dto.EventRequest;
 import ru.practicum.stats.service.dto.StatisticResponse;
 

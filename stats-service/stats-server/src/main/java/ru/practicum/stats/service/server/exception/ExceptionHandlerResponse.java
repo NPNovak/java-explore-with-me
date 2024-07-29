@@ -1,4 +1,4 @@
-package ru.practicum.stats.server.exception;
+package ru.practicum.stats.service.server.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
