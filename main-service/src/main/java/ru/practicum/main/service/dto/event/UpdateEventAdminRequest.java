@@ -5,8 +5,8 @@ import lombok.*;
 import ru.practicum.main.service.validation.HoursAfterOrEquals;
 import ru.practicum.main.service.enums.StateAdminAction;
 
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 

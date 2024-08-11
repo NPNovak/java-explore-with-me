@@ -10,8 +10,8 @@ import ru.practicum.main.service.dto.event.UpdateEventAdminRequest;
 import ru.practicum.main.service.enums.StateEvent;
 import ru.practicum.main.service.service.EventService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
 

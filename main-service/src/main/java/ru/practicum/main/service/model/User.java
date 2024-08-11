@@ -2,7 +2,7 @@ package ru.practicum.main.service.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Getter
 @Setter

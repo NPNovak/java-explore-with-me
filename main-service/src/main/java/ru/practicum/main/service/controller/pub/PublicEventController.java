@@ -10,8 +10,8 @@ import ru.practicum.main.service.dto.event.EventShortResponse;
 import ru.practicum.main.service.enums.StateSortEvent;
 import ru.practicum.main.service.service.EventService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.Positive;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.List;
 

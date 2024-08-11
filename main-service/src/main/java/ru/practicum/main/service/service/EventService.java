@@ -25,8 +25,8 @@ import ru.practicum.main.service.specification.EventSpecification;
 import ru.practicum.stats.service.client.StatsClient;
 import ru.practicum.stats.service.dto.EventRequest;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 

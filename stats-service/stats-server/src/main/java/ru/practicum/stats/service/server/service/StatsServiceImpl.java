@@ -8,7 +8,7 @@ import ru.practicum.stats.service.server.repository.StatsRepository;
 import ru.practicum.stats.service.dto.EventRequest;
 import ru.practicum.stats.service.dto.StatisticResponse;
 
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;

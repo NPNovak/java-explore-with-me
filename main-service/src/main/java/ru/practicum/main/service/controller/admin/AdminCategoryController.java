@@ -9,8 +9,8 @@ import ru.practicum.main.service.dto.category.CategoryResponse;
 import ru.practicum.main.service.dto.category.NewCategoryRequest;
 import ru.practicum.main.service.service.CategoryService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/admin/categories")

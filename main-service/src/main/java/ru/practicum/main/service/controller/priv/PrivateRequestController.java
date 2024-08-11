@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.main.service.dto.request.ParticipationRequestResponse;
 import ru.practicum.main.service.service.RequestService;
 
-import javax.validation.constraints.Positive;
+import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 @RestController

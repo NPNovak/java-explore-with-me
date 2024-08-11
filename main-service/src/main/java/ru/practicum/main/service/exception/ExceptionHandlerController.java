@@ -15,7 +15,7 @@ import ru.practicum.main.service.exception.model.NotExistException;
 import ru.practicum.main.service.exception.response.ApiError;
 import ru.practicum.stats.service.exception.ServerResponseException;
 
-import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;

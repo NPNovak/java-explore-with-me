@@ -10,8 +10,8 @@ import ru.practicum.main.service.dto.request.ParticipationRequestResponse;
 import ru.practicum.main.service.service.EventService;
 import ru.practicum.main.service.service.RequestService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 @RestController

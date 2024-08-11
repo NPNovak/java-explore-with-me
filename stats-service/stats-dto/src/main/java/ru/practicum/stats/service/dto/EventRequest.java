@@ -3,9 +3,9 @@ package ru.practicum.stats.service.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDateTime;
 
 @Getter
