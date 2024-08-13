@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.validation.ConstraintViolationException;
 
-@RestControllerAdvice("ru.practicum.stats.server")
+@RestControllerAdvice("ru.practicum.stats.service.server")
 @Slf4j
 public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
