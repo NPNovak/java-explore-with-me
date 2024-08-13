@@ -16,7 +16,7 @@ public class EventSpecification {
         if (users == null || users.isEmpty()) {
             return null;
         }
-        return ((root, query, criteriaBuilder) -> root.get("initiator").in(users));
+        return ((root, query, criteriaBuilder) -> root.get("initiator").get("id").in(users));
     }
 
     public static Specification<Event> hasStates(List<StateEvent> states) {
@@ -30,7 +30,7 @@ public class EventSpecification {
         if (categories == null || categories.isEmpty()) {
             return null;
         }
-        return ((root, query, criteriaBuilder) -> root.get("category").in(categories));
+        return ((root, query, criteriaBuilder) -> root.get("category").get("id").in(categories));
     }
 
     public static Specification<Event> hasRangeStart(LocalDateTime rangeStart) {
