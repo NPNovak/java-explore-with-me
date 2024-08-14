@@ -7,10 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.main.service.dto.event.*;
-import ru.practicum.main.service.enums.StateAdminAction;
 import ru.practicum.main.service.enums.StateEvent;
 import ru.practicum.main.service.enums.StateSortEvent;
-import ru.practicum.main.service.enums.StateUserAction;
 import ru.practicum.main.service.exception.model.ConflictException;
 import ru.practicum.main.service.exception.model.NotExistException;
 import ru.practicum.main.service.mapper.CategoryMapper;
@@ -22,11 +20,12 @@ import ru.practicum.main.service.repository.CategoryRepository;
 import ru.practicum.main.service.repository.EventRepository;
 import ru.practicum.main.service.repository.UserRepository;
 import ru.practicum.main.service.specification.EventSpecification;
-import ru.practicum.stats.service.client.StatsClient;
-import ru.practicum.stats.service.dto.EventRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
+import ru.practicum.stats.service.client.StatsClient;
+import ru.practicum.stats.service.dto.EventRequest;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -34,7 +33,6 @@ import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class EventService {
 
     private final EventRepository repository;
@@ -66,7 +64,6 @@ public class EventService {
                 userMapper.toUserShortResponse(event.getInitiator()));
     }
 
-    @Transactional
     public EventFullResponse getEventPublic(long eventId, HttpServletRequest request) {
         Event event = checkEvent(eventId);
         if (!event.getState().equals(StateEvent.PUBLISHED)) {
@@ -82,7 +79,7 @@ public class EventService {
         event.setViews(statsClient.getStatistics(event.getCreatedOn(),
                 LocalDateTime.now(),
                 List.of(request.getRequestURI()),
-                true).get(0).getHits());
+                true).getFirst().getHits());
 
         repository.save(event);
 
@@ -119,7 +116,6 @@ public class EventService {
                 .collect(toList());
     }
 
-    @Transactional
     public List<EventShortResponse> searchEventsPublic(String text,
                                                        List<Long> categories,
                                                        Boolean paid,
@@ -186,47 +182,7 @@ public class EventService {
             throw new ConflictException("User с id = " + userId + " не является инициатором события");
         }
 
-        if (updateRequest.getAnnotation() != null) {
-            event.setAnnotation(updateRequest.getAnnotation());
-        }
-        if (updateRequest.getCategory() != null) {
-            event.setCategory(categoryRepository.findById(updateRequest.getCategory())
-                    .orElseThrow(() -> new NotExistException("Category с id = " + updateRequest.getCategory() + " не существует")));
-        }
-        if (updateRequest.getDescription() != null) {
-            event.setDescription(updateRequest.getDescription());
-        }
-        if (updateRequest.getEventDate() != null) {
-            event.setEventDate(updateRequest.getEventDate());
-        }
-        if (updateRequest.getLocation() != null) {
-            if (updateRequest.getLocation().getLat() != null) {
-                event.setLat(updateRequest.getLocation().getLat());
-            }
-            if (updateRequest.getLocation().getLon() != null) {
-                event.setLon(updateRequest.getLocation().getLon());
-            }
-        }
-        if (updateRequest.getPaid() != null) {
-            event.setPaid(updateRequest.getPaid());
-        }
-        if (updateRequest.getParticipantLimit() != null) {
-            event.setParticipantLimit(updateRequest.getParticipantLimit());
-        }
-        if (updateRequest.getRequestModeration() != null) {
-            event.setRequestModeration(updateRequest.getRequestModeration());
-        }
-        if (updateRequest.getStateAction() != null) {
-            if (updateRequest.getStateAction().equals(StateUserAction.CANCEL_REVIEW)) {
-                event.setState(StateEvent.CANCELED);
-            } else {
-                event.setState(StateEvent.PENDING);
-            }
-        }
-
-        if (updateRequest.getTitle() != null) {
-            event.setTitle(updateRequest.getTitle());
-        }
+        mapper.updateEventFromRequest(updateRequest, event, categoryRepository);
 
         return mapper.toEventFullResponse(repository.save(event),
                 categoryMapper.toCategoryDto(event.getCategory()),
@@ -241,47 +197,7 @@ public class EventService {
             throw new ConflictException("Event не находиться в ожидании публикации");
         }
 
-        if (updateRequest.getAnnotation() != null) {
-            event.setAnnotation(updateRequest.getAnnotation());
-        }
-        if (updateRequest.getCategory() != null) {
-            event.setCategory(categoryRepository.findById(updateRequest.getCategory())
-                    .orElseThrow(() -> new NotExistException("Category с id = " + updateRequest.getCategory() + " не существует")));
-        }
-        if (updateRequest.getDescription() != null) {
-            event.setDescription(updateRequest.getDescription());
-        }
-        if (updateRequest.getEventDate() != null) {
-            event.setEventDate(updateRequest.getEventDate());
-        }
-        if (updateRequest.getLocation() != null) {
-            if (updateRequest.getLocation().getLat() != null) {
-                event.setLat(updateRequest.getLocation().getLat());
-            }
-            if (updateRequest.getLocation().getLon() != null) {
-                event.setLon(updateRequest.getLocation().getLon());
-            }
-        }
-        if (updateRequest.getPaid() != null) {
-            event.setPaid(updateRequest.getPaid());
-        }
-        if (updateRequest.getParticipantLimit() != null) {
-            event.setParticipantLimit(updateRequest.getParticipantLimit());
-        }
-        if (updateRequest.getRequestModeration() != null) {
-            event.setRequestModeration(updateRequest.getRequestModeration());
-        }
-        if (updateRequest.getStateAction() != null) {
-            if (updateRequest.getStateAction().equals(StateAdminAction.PUBLISH_EVENT)) {
-                event.setState(StateEvent.PUBLISHED);
-                event.setPublishedOn(LocalDateTime.now());
-            } else {
-                event.setState(StateEvent.CANCELED);
-            }
-        }
-        if (updateRequest.getTitle() != null) {
-            event.setTitle(updateRequest.getTitle());
-        }
+        mapper.updateEventFromAdminRequest(updateRequest, event, categoryRepository);
 
         return mapper.toEventFullResponse(repository.save(event),
                 categoryMapper.toCategoryDto(event.getCategory()),

@@ -2,12 +2,12 @@ package ru.practicum.main.service.mapper;
 
 import org.springframework.stereotype.Component;
 import ru.practicum.main.service.dto.category.CategoryResponse;
-import ru.practicum.main.service.dto.event.EventFullResponse;
-import ru.practicum.main.service.dto.event.EventShortResponse;
-import ru.practicum.main.service.dto.event.LocationDto;
-import ru.practicum.main.service.dto.event.NewEventRequest;
+import ru.practicum.main.service.dto.event.*;
 import ru.practicum.main.service.dto.user.UserShortResponse;
+import ru.practicum.main.service.enums.StateAdminAction;
 import ru.practicum.main.service.enums.StateEvent;
+import ru.practicum.main.service.enums.StateUserAction;
+import ru.practicum.main.service.exception.model.NotExistException;
 import ru.practicum.main.service.model.Event;
 
 import java.time.LocalDateTime;
@@ -78,4 +78,93 @@ public class EventMapper {
         eventFullResponse.setViews(event.getViews());
         return eventFullResponse;
     }
+
+    public void updateEventFromRequest(UpdateEventUserRequest updateRequest, Event event, ru.practicum.main.service.repository.CategoryRepository categoryRepository) {
+        if (updateRequest.getAnnotation() != null) {
+            event.setAnnotation(updateRequest.getAnnotation());
+        }
+        if (updateRequest.getCategory() != null) {
+            event.setCategory(categoryRepository.findById(updateRequest.getCategory())
+                    .orElseThrow(() -> new NotExistException("Category с id = " + updateRequest.getCategory() + " не существует")));
+        }
+        if (updateRequest.getDescription() != null) {
+            event.setDescription(updateRequest.getDescription());
+        }
+        if (updateRequest.getEventDate() != null) {
+            event.setEventDate(updateRequest.getEventDate());
+        }
+        if (updateRequest.getLocation() != null) {
+            if (updateRequest.getLocation().getLat() != null) {
+                event.setLat(updateRequest.getLocation().getLat());
+            }
+            if (updateRequest.getLocation().getLon() != null) {
+                event.setLon(updateRequest.getLocation().getLon());
+            }
+        }
+        if (updateRequest.getPaid() != null) {
+            event.setPaid(updateRequest.getPaid());
+        }
+        if (updateRequest.getParticipantLimit() != null) {
+            event.setParticipantLimit(updateRequest.getParticipantLimit());
+        }
+        if (updateRequest.getRequestModeration() != null) {
+            event.setRequestModeration(updateRequest.getRequestModeration());
+        }
+        if (updateRequest.getStateAction() != null) {
+            if (updateRequest.getStateAction().equals(StateUserAction.CANCEL_REVIEW)) {
+                event.setState(StateEvent.CANCELED);
+            } else {
+                event.setState(StateEvent.PENDING);
+            }
+        }
+
+        if (updateRequest.getTitle() != null) {
+            event.setTitle(updateRequest.getTitle());
+        }
+    }
+
+    public void updateEventFromAdminRequest(UpdateEventAdminRequest updateRequest, Event event, ru.practicum.main.service.repository.CategoryRepository categoryRepository) {
+        if (updateRequest.getAnnotation() != null) {
+            event.setAnnotation(updateRequest.getAnnotation());
+        }
+        if (updateRequest.getCategory() != null) {
+            event.setCategory(categoryRepository.findById(updateRequest.getCategory())
+                    .orElseThrow(() -> new NotExistException("Category с id = " + updateRequest.getCategory() + " не существует")));
+        }
+        if (updateRequest.getDescription() != null) {
+            event.setDescription(updateRequest.getDescription());
+        }
+        if (updateRequest.getEventDate() != null) {
+            event.setEventDate(updateRequest.getEventDate());
+        }
+        if (updateRequest.getLocation() != null) {
+            if (updateRequest.getLocation().getLat() != null) {
+                event.setLat(updateRequest.getLocation().getLat());
+            }
+            if (updateRequest.getLocation().getLon() != null) {
+                event.setLon(updateRequest.getLocation().getLon());
+            }
+        }
+        if (updateRequest.getPaid() != null) {
+            event.setPaid(updateRequest.getPaid());
+        }
+        if (updateRequest.getParticipantLimit() != null) {
+            event.setParticipantLimit(updateRequest.getParticipantLimit());
+        }
+        if (updateRequest.getRequestModeration() != null) {
+            event.setRequestModeration(updateRequest.getRequestModeration());
+        }
+        if (updateRequest.getStateAction() != null) {
+            if (updateRequest.getStateAction().equals(StateAdminAction.PUBLISH_EVENT)) {
+                event.setState(StateEvent.PUBLISHED);
+                event.setPublishedOn(LocalDateTime.now());
+            } else {
+                event.setState(StateEvent.CANCELED);
+            }
+        }
+        if (updateRequest.getTitle() != null) {
+            event.setTitle(updateRequest.getTitle());
+        }
+    }
+
 }
