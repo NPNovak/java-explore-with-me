@@ -27,11 +27,11 @@ public class EventMapper {
         if (newEventRequest.getEventDate() != null) {
             event.setEventDate(newEventRequest.getEventDate());
         }
-        if(newEventRequest.getLocation() != null) {
-            if(newEventRequest.getLocation().getLat() != null){
+        if (newEventRequest.getLocation() != null) {
+            if (newEventRequest.getLocation().getLat() != null) {
                 event.setLat(newEventRequest.getLocation().getLat());
             }
-            if(newEventRequest.getLocation().getLon() != null){
+            if (newEventRequest.getLocation().getLon() != null) {
                 event.setLon(newEventRequest.getLocation().getLon());
             }
         }
@@ -43,7 +43,7 @@ public class EventMapper {
             event.setRequestModeration(newEventRequest.getRequestModeration());
         }
         event.setState(StateEvent.PENDING);
-        if(newEventRequest.getTitle() != null){
+        if (newEventRequest.getTitle() != null) {
             event.setTitle(newEventRequest.getTitle());
         }
         return event;
@@ -53,24 +53,24 @@ public class EventMapper {
                                                    CategoryResponse categoryResponse,
                                                    UserShortResponse userShortDto) {
         EventShortResponse eventShortResponse = new EventShortResponse();
-        if(event.getAnnotation() != null){
+        if (event.getAnnotation() != null) {
             eventShortResponse.setAnnotation(event.getAnnotation());
         }
-        if(categoryResponse != null){
+        if (categoryResponse != null) {
             eventShortResponse.setCategory(categoryResponse);
         }
         if (event.getConfirmedRequests() != null) {
             eventShortResponse.setConfirmedRequests((long) event.getConfirmedRequests().size());
         }
-        if(event.getEventDate() != null){
+        if (event.getEventDate() != null) {
             eventShortResponse.setEventDate(event.getEventDate());
         }
         eventShortResponse.setId(event.getId());
-        if(userShortDto != null){
+        if (userShortDto != null) {
             eventShortResponse.setInitiator(userShortDto);
         }
         eventShortResponse.setPaid(event.isPaid());
-        if(event.getTitle() != null){
+        if (event.getTitle() != null) {
             eventShortResponse.setTitle(event.getTitle());
         }
         eventShortResponse.setViews(event.getViews());
@@ -81,42 +81,42 @@ public class EventMapper {
                                                  CategoryResponse categoryResponse,
                                                  UserShortResponse userShortDto) {
         EventFullResponse eventFullResponse = new EventFullResponse();
-        if(eventFullResponse.getId() != null){
+        if (eventFullResponse.getId() != null) {
             eventFullResponse.setId(event.getId());
         }
-        if(event.getAnnotation() != null){
+        if (event.getAnnotation() != null) {
             eventFullResponse.setAnnotation(event.getAnnotation());
         }
-        if(categoryResponse != null){
+        if (categoryResponse != null) {
             eventFullResponse.setCategory(categoryResponse);
         }
         if (event.getConfirmedRequests() != null) {
             eventFullResponse.setConfirmedRequests((long) event.getConfirmedRequests().size());
         }
         eventFullResponse.setId(event.getId());
-        if(event.getCreatedOn() != null){
+        if (event.getCreatedOn() != null) {
             eventFullResponse.setCreatedOn(event.getCreatedOn());
         }
-        if(event.getDescription() != null){
+        if (event.getDescription() != null) {
             eventFullResponse.setDescription(event.getDescription());
         }
-        if(event.getEventDate() != null){
+        if (event.getEventDate() != null) {
             eventFullResponse.setEventDate(event.getEventDate());
         }
-        if(userShortDto != null){
+        if (userShortDto != null) {
             eventFullResponse.setInitiator(userShortDto);
         }
         eventFullResponse.setLocation(new LocationDto(event.getLat(), event.getLon()));
         eventFullResponse.setPaid(event.isPaid());
         eventFullResponse.setParticipantLimit(event.getParticipantLimit());
-        if(event.getPublishedOn() != null){
+        if (event.getPublishedOn() != null) {
             eventFullResponse.setPublishedOn(event.getPublishedOn());
         }
         eventFullResponse.setRequestModeration(event.isRequestModeration());
-        if(event.getState() != null){
+        if (event.getState() != null) {
             eventFullResponse.setState(event.getState());
         }
-        if(event.getTitle() != null){
+        if (event.getTitle() != null) {
             eventFullResponse.setTitle(event.getTitle());
         }
         eventFullResponse.setViews(event.getViews());

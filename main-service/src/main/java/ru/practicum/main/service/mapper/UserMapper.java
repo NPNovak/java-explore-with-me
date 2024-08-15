@@ -11,10 +11,10 @@ public class UserMapper {
 
     public User toUser(NewUserRequest newUserRequest) {
         User user = new User();
-        if(newUserRequest.getEmail() != null) {
+        if (newUserRequest.getEmail() != null) {
             user.setEmail(newUserRequest.getEmail());
         }
-        if(newUserRequest.getName() != null) {
+        if (newUserRequest.getName() != null) {
             user.setName(newUserRequest.getName());
         }
         return user;
@@ -22,12 +22,12 @@ public class UserMapper {
 
     public UserResponse toUserResponse(User user) {
         UserResponse userResponse = new UserResponse();
-        if(user != null) {
+        if (user != null) {
             userResponse.setId(user.getId());
-            if(user.getEmail() != null) {
+            if (user.getEmail() != null) {
                 userResponse.setEmail(user.getEmail());
             }
-            if(user.getName() != null) {
+            if (user.getName() != null) {
                 userResponse.setName(user.getName());
             }
         }
@@ -36,9 +36,9 @@ public class UserMapper {
 
     public UserShortResponse toUserShortResponse(User user) {
         UserShortResponse userShortResponse = new UserShortResponse();
-        if(user != null) {
+        if (user != null) {
             userShortResponse.setId(user.getId());
-            if(user.getName() != null) {
+            if (user.getName() != null) {
                 userShortResponse.setName(user.getName());
             }
         }

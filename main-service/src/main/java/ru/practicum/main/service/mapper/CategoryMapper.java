@@ -10,7 +10,7 @@ public class CategoryMapper {
 
     public Category toCategory(NewCategoryRequest newCategoryRequest) {
         Category category = new Category();
-        if(newCategoryRequest.getName() != null) {
+        if (newCategoryRequest.getName() != null) {
             category.setName(newCategoryRequest.getName());
         }
         return category;
@@ -18,7 +18,7 @@ public class CategoryMapper {
 
     public CategoryResponse toCategoryDto(Category category) {
         CategoryResponse categoryResponse = new CategoryResponse();
-        if(category.getName() != null) {
+        if (category.getName() != null) {
             categoryResponse.setName(category.getName());
         }
         categoryResponse.setId(category.getId());

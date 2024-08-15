@@ -11,10 +11,10 @@ public class RequestMapper {
         ParticipationRequestResponse participationRequestResponse = new ParticipationRequestResponse();
         participationRequestResponse.setId(request.getId());
         participationRequestResponse.setEvent(request.getEventId());
-        if(request.getStatus() != null){
+        if (request.getStatus() != null) {
             participationRequestResponse.setStatus(request.getStatus());
         }
-        if(request.getCreated() != null){
+        if (request.getCreated() != null) {
             participationRequestResponse.setCreated(request.getCreated());
         }
         return participationRequestResponse;
