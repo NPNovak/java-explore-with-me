@@ -11,16 +11,37 @@ public class UserMapper {
 
     public User toUser(NewUserRequest newUserRequest) {
         User user = new User();
-        user.setEmail(newUserRequest.getEmail());
-        user.setName(newUserRequest.getName());
+        if(newUserRequest.getEmail() != null) {
+            user.setEmail(newUserRequest.getEmail());
+        }
+        if(newUserRequest.getName() != null) {
+            user.setName(newUserRequest.getName());
+        }
         return user;
     }
 
     public UserResponse toUserResponse(User user) {
-        return new UserResponse(user.getId(), user.getEmail(), user.getName());
+        UserResponse userResponse = new UserResponse();
+        if(user != null) {
+            userResponse.setId(user.getId());
+            if(user.getEmail() != null) {
+                userResponse.setEmail(user.getEmail());
+            }
+            if(user.getName() != null) {
+                userResponse.setName(user.getName());
+            }
+        }
+        return userResponse;
     }
 
     public UserShortResponse toUserShortResponse(User user) {
-        return new UserShortResponse(user.getId(), user.getName());
+        UserShortResponse userShortResponse = new UserShortResponse();
+        if(user != null) {
+            userShortResponse.setId(user.getId());
+            if(user.getName() != null) {
+                userShortResponse.setName(user.getName());
+            }
+        }
+        return userShortResponse;
     }
 }

@@ -20,7 +20,11 @@ import ru.practicum.main.service.model.Event;
 import ru.practicum.main.service.repository.CompilationRepository;
 import ru.practicum.main.service.repository.EventRepository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;

@@ -10,11 +10,18 @@ public class CategoryMapper {
 
     public Category toCategory(NewCategoryRequest newCategoryRequest) {
         Category category = new Category();
-        category.setName(newCategoryRequest.getName());
+        if(newCategoryRequest.getName() != null) {
+            category.setName(newCategoryRequest.getName());
+        }
         return category;
     }
 
     public CategoryResponse toCategoryDto(Category category) {
-        return new CategoryResponse(category.getId(), category.getName());
+        CategoryResponse categoryResponse = new CategoryResponse();
+        if(category.getName() != null) {
+            categoryResponse.setName(category.getName());
+        }
+        categoryResponse.setId(category.getId());
+        return categoryResponse;
     }
 }

@@ -8,10 +8,15 @@ import ru.practicum.main.service.model.Request;
 public class RequestMapper {
 
     public ParticipationRequestResponse toParticipationRequestResponse(Request request) {
-        return new ParticipationRequestResponse(request.getId(),
-                request.getEventId(),
-                request.getRequesterId(),
-                request.getStatus(),
-                request.getCreated());
+        ParticipationRequestResponse participationRequestResponse = new ParticipationRequestResponse();
+        participationRequestResponse.setId(request.getId());
+        participationRequestResponse.setEvent(request.getEventId());
+        if(request.getStatus() != null){
+            participationRequestResponse.setStatus(request.getStatus());
+        }
+        if(request.getCreated() != null){
+            participationRequestResponse.setCreated(request.getCreated());
+        }
+        return participationRequestResponse;
     }
 }

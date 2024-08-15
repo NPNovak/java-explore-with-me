@@ -13,18 +13,31 @@ public class CompilationMapper {
 
     public Compilation toCompilation(NewCompilationRequest newCompilationRequest) {
         Compilation compilation = new Compilation();
-        compilation.setPinned(newCompilationRequest.isPinned());
-        compilation.setTitle(newCompilationRequest.getTitle());
-        compilation.setEvents(newCompilationRequest.getEvents());
+        if (newCompilationRequest != null) {
+            compilation.setPinned(newCompilationRequest.isPinned());
+
+            if (newCompilationRequest.getTitle() != null) {
+                compilation.setTitle(newCompilationRequest.getTitle());
+            }
+            if (newCompilationRequest.getEvents() != null) {
+                compilation.setEvents(newCompilationRequest.getEvents());
+            }
+        }
         return compilation;
     }
 
     public CompilationResponse toCompilationResponse(Compilation compilation, List<EventShortResponse> events) {
         CompilationResponse compilationResponse = new CompilationResponse();
-        compilationResponse.setId(compilation.getId());
-        compilationResponse.setEvents(events);
-        compilationResponse.setPinned(compilation.isPinned());
-        compilationResponse.setTitle(compilation.getTitle());
+        if (compilation != null) {
+            compilationResponse.setId(compilation.getId());
+            compilationResponse.setPinned(compilation.isPinned());
+            if (compilation.getTitle() != null) {
+                compilationResponse.setTitle(compilation.getTitle());
+            }
+        }
+        if (events != null) {
+            compilationResponse.setEvents(events);
+        }
         return compilationResponse;
     }
 }
