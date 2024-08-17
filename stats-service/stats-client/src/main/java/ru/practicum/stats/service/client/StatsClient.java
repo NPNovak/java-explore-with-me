@@ -33,8 +33,8 @@ public class StatsClient {
         StringBuilder urlRequest = new StringBuilder();
 
         urlRequest.append(url)
-                .append("/ru/practicum/stats/service")
-                .append("start=")
+                .append("/stats")
+                .append("?start=")
                 .append(start.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .append("&end=")
                 .append(end.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
