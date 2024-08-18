@@ -30,6 +30,7 @@ public class UserMapper {
             if (user.getName() != null) {
                 userResponse.setName(user.getName());
             }
+            userResponse.setFriends(user.getFriends());
         }
         return userResponse;
     }
